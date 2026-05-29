@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Fokus",
+  "version": "0.1.0",
+  "description": "Block every site not on your AI-picked allowlist during a focus sprint.",
+  "permissions": ["tabs", "webNavigation", "alarms"],
+  "host_permissions": ["http://localhost:7777/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html", "blocked.css", "blocked.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

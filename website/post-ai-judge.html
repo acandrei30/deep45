@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI That Decides What You Can Browse — 45</title>
+  <meta name="description" content="Static blocklists always fail. We built a per-task AI judge that evaluates each domain against what you're working on.">
+  <link rel="icon" href="favicon.ico">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The AI That Decides What You Can Browse — 45">
+  <meta property="og:description" content="Static blocklists always fail. We built a per-task AI judge that evaluates each domain against what you're working on.">
+  <meta property="og:image" content="logo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The AI That Decides What You Can Browse — 45">
+  <meta name="twitter:description" content="Static blocklists always fail. We built a per-task AI judge that evaluates each domain against what you're working on.">
+  <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .post-header { padding: 80px 32px 48px; }
+    .post-header h1 { font-family: var(--serif); font-size: 3rem; font-weight: 400; line-height: 1.15; margin-bottom: 20px; max-width: 680px; }
+    .post-header .meta { color: var(--text-tertiary); font-family: var(--mono); font-size: 0.85rem; }
+    .post-body { padding: 0 32px 100px; }
+    .post-body .container { max-width: 680px; }
+    .post-body p { color: var(--text-secondary); font-size: 1.08rem; line-height: 1.75; margin-bottom: 24px; }
+    .post-body h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--text-primary); margin: 48px 0 16px; }
+    .post-body strong { color: var(--text-primary); }
+    .post-body blockquote { border-left: 3px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-primary); font-family: var(--serif); font-size: 1.15rem; font-style: italic; }
+    .code-block { background: #111; border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 28px 0; font-family: var(--mono); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+    .code-block .amber { color: var(--accent); }
+    .back { display: inline-block; color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 32px; }
+    .back:hover { color: var(--accent); }
+  </style>
+</head>
+<body class="light-page">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand"><img src="logo.jpg" class="nav-logo" alt="45"></a>
+    <div class="nav-links">
+      <a href="index.html#how">How it works</a>
+      <a href="teams.html">For teams</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#download" class="btn-pill">Get 45</a>
+    </div>
+  </nav>
+
+  <article>
+    <header class="post-header">
+      <div class="container narrow">
+        <a href="blog.html" class="back">← All posts</a>
+        <p class="kicker">HOW IT WORKS</p>
+        <h1>The AI That Decides What You Can Browse</h1>
+        <p class="meta">May 2026 · 6 min read</p>
+      </div>
+    </header>
+
+    <div class="post-body">
+      <div class="container">
+
+        <p>Every focus app that blocks websites has the same problem: the list. Someone has to decide what's on it. That person is usually you, which means you make the decision when you set up the app — calmly, rationally, in a low-stakes moment — and then your future distracted self finds seventeen workarounds.</p>
+
+        <p>Static blocklists also can't reason about context. Is YouTube a distraction? It depends entirely on what you're doing. If you're writing a legal brief, yes. If you're editing video, it's your research library. A list can't know the difference. You have to maintain separate profiles, toggle lists on and off, and spend mental energy managing your tools instead of doing your work.</p>
+
+        <p>We built something different.</p>
+
+        <h2>A judge, not a list</h2>
+
+        <p>When you start a session in 45, you describe what you're working on in plain language. "Write the Q3 board deck." "Fix the auth bug in the API." "Research suppliers for the new product line."</p>
+
+        <p>That description becomes the context for every decision the app makes during the next 45 minutes. When your browser requests a domain, 45 evaluates that domain against your task — not against a list — and decides in real time whether to allow it or block it.</p>
+
+        <p>The evaluation is done by a small, fast AI model (GPT-4o-mini) running through our backend. The prompt looks roughly like this:</p>
+
+        <div class="code-block">
+          <span class="amber">Sprint task:</span> "write the Q3 board deck"<br>
+          <span class="amber">Domain:</span> "reddit.com"<br><br>
+          Is this domain relevant to the task?<br>
+          → <span class="amber">{"allow": false, "reason": "social media, off-task"}</span>
+        </div>
+
+        <p>For "write the Q3 board deck", reddit.com is blocked. But if your task were "research community sentiment on our product launch", it might be allowed. The AI reads the task, reads the domain, and makes a judgment call — the same one you'd make if you stopped to think about it.</p>
+
+        <h2>What actually gets sent to the AI</h2>
+
+        <p>We're deliberate about what leaves your machine. The only data sent to the AI model is:</p>
+
+        <p><strong>1. Your task description.</strong> The plain-text string you typed or spoke. Nothing else about you, your identity, or your history.</p>
+
+        <p><strong>2. The root domain being evaluated.</strong> Not the full URL — just the domain. So "github.com", not "github.com/yourcompany/privaterepo/pull/143".</p>
+
+        <p>That's it. Two strings, one prompt, one JSON response. The model doesn't know who you are, what company you work for, or what you did in previous sessions.</p>
+
+        <h2>The infrastructure that never calls the AI</h2>
+
+        <p>Most browser activity isn't decisions — it's plumbing. When you load any modern website, your browser makes dozens of requests to CDNs, analytics services, font providers, and authentication endpoints. Evaluating each of these with an AI call would be slow, expensive, and pointless.</p>
+
+        <p>45 handles this with two pre-AI filters. The first is an infrastructure allowlist: known CDNs, SSO providers, and asset hosts that are always safe to pass through (Google Fonts, Cloudflare, Stripe's payment widget, etc.). The second is a noise filter: analytics trackers, ad networks, and telemetry services that are always silently blocked without cluttering the decisions feed.</p>
+
+        <p>Only domains that aren't in either category — domains you might actually be navigating to — reach the AI. In practice, that's a small fraction of total requests, and each new domain is only evaluated once per session. The result is cached for the rest of the 45 minutes.</p>
+
+        <h2>Why it works where lists fail</h2>
+
+        <p>The core advantage of per-task AI evaluation is that it <strong>scales to any task without configuration</strong>. You don't maintain lists. You don't create profiles. You type what you're working on, and the right sites are available — not because you set them up, but because the AI understands the task.</p>
+
+        <p>When you're doing outreach on LinkedIn, LinkedIn is allowed. When you switch to writing documentation, LinkedIn is blocked. The app adapts to your work without you touching a setting.</p>
+
+        <p>The failures of static blocklists — the workarounds, the wrong-task profiles, the cognitive overhead of managing your own rules — disappear because there are no rules to manage. There's just your task, and a model deciding what's relevant to it.</p>
+
+        <p>We think this is the only architecture that actually works for knowledge workers whose tasks change every session. Everything else is just a slightly fancier list.</p>
+
+      </div>
+    </div>
+  </article>
+
+  <section style="background:var(--surface);padding:60px 32px;text-align:center;">
+    <div class="container narrow">
+      <h2 style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:12px">See it in action.</h2>
+      <p style="color:var(--text-secondary);margin-bottom:28px">Download 45 and watch the decisions feed during your first session.</p>
+      <a href="index.html#download" class="btn-pill big">Download for Windows</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div><img src="logo.jpg" class="footer-logo" alt="45"><p class="footer-text">Deep work, four times daily.</p></div>
+        <div class="footer-links">
+          <a href="blog.html">Blog</a>
+          <a href="teams.html">For teams</a>
+          <a href="mailto:hello@45.day">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 · 45</p>
+    </div>
+  </footer>
+
+</body>
+</html>

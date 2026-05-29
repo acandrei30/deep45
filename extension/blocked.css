@@ -1,0 +1,79 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: #0a0a0a;
+  color: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.card {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: #ff3b30;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  border-radius: 4px;
+  margin-bottom: 36px;
+}
+
+.label {
+  color: #666;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 32px;
+  line-height: 1.4;
+  color: #f0f0f0;
+}
+
+.timer {
+  font-size: 88px;
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  margin: 28px 0;
+  letter-spacing: -2px;
+  color: #fff;
+}
+
+.blocked-url {
+  color: #555;
+  font-size: 12px;
+  font-family: Consolas, "SF Mono", monospace;
+  margin-bottom: 48px;
+  word-break: break-all;
+}
+
+.blocked-url span { color: #888; }
+
+.allowed {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #222;
+}
+
+#allowed {
+  color: #999;
+  font-size: 14px;
+  font-family: Consolas, "SF Mono", monospace;
+  line-height: 1.8;
+}

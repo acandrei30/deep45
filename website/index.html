@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>45 — deep work, four times daily</title>
+  <meta name="description" content="Four 45-minute sprints. One deep work day. AI blocks every distraction for the task you're on.">
+  <link rel="icon" href="favicon.ico">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="45 — Deep work, four times daily">
+  <meta property="og:description" content="Four 45-minute sprints. AI blocks every distraction for the task you're on. Three hours of real focus, every day.">
+  <meta property="og:image" content="logo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="45 — Deep work, four times daily">
+  <meta name="twitter:description" content="Four 45-minute sprints. AI blocks every distraction for the task you're on. Three hours of real focus, every day.">
+  <script defer data-domain="deep45.app" src="https://plausible.io/js/script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Download modal */
+    .dl-modal-bg {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .dl-modal {
+      background: #1e1e1e;
+      border: 1px solid #2e2e2e;
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+    }
+    .dl-modal h3 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+    }
+    .dl-modal .dl-sub {
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+    .dl-steps {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .dl-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .dl-step-num {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 0.8rem;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .dl-step-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+    .dl-step-text strong { color: var(--text-primary); }
+    .dl-note {
+      background: rgba(245,180,84,0.08);
+      border: 1px solid rgba(245,180,84,0.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-tertiary);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .dl-close {
+      background: none;
+      border: none;
+      color: var(--text-tertiary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .dl-close:hover { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+  <!-- Download instructions modal -->
+  <div class="dl-modal-bg" id="dlModal">
+    <div class="dl-modal">
+      <h3>Your download is starting.</h3>
+      <p class="dl-sub">One extra step — Windows gets suspicious of new apps.</p>
+      <div class="dl-steps">
+        <div class="dl-step">
+          <div class="dl-step-num">1</div>
+          <div class="dl-step-text">Open <strong>Fortyfive.exe</strong> from your Downloads folder.</div>
+        </div>
+        <div class="dl-step">
+          <div class="dl-step-num">2</div>
+          <div class="dl-step-text">Windows will show a blue warning screen. Click <strong>"More info"</strong>.</div>
+        </div>
+        <div class="dl-step">
+          <div class="dl-step-num">3</div>
+          <div class="dl-step-text">Click <strong>"Run anyway"</strong> — and you're in.</div>
+        </div>
+      </div>
+      <div class="dl-note">
+        💡 Why does this happen? Windows flags new apps that haven't built a download history yet.
+        Ironically, blocking software gets extra scrutiny — Windows would rather you stayed distracted.
+      </div>
+      <a id="dlStartBtn" href="https://github.com/acandrei30/deep45/releases/download/v1.0.0/Fortyfive.exe" class="btn-pill big" style="display:inline-block;margin-bottom:16px;text-decoration:none;">Download now</a><br>
+      <button class="dl-close" onclick="document.getElementById('dlModal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="#" class="nav-brand">
+      <img src="logo.jpg" class="nav-logo" alt="45">
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="teams.html">For teams</a>
+      <a href="blog.html">Blog</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn-pill dl-trigger">Get 45</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="hero-eyebrow">DEEP WORK, FOUR TIMES A DAY</p>
+        <h1>4× your focus. <span class="muted">Zero noise.</span></h1>
+        <p class="hero-sub">
+          Three hours of real, uninterrupted work. Every day.
+          Four locked 45-minute sprints — AI blocks every site and app
+          that isn't your task while the timer runs.
+        </p>
+        <ul class="hero-bullets">
+          <li><strong>3h</strong> of actual deep work per day</li>
+          <li><strong>0</strong> distractions during a sprint</li>
+        </ul>
+        <div class="hero-cta">
+          <a href="#" class="btn-pill big dl-trigger">Download for Windows</a>
+          <span class="hero-meta">$7 / mo · 7-day free trial · no card required</span>
+        </div>
+      </div>
+
+      <!-- Product preview: 3-scene cross-fade animation -->
+      <div class="hero-preview">
+        <div class="preview-window">
+          <div class="preview-titlebar">
+            <span class="tb-dot"></span>
+            <span class="tb-dot"></span>
+            <span class="tb-dot"></span>
+            <span class="tb-title">45</span>
+          </div>
+          <div class="preview-body">
+
+            <!-- Scene 1: writing a task -->
+            <div class="scene scene-input">
+              <div class="si-session">SESSION 01 / 04</div>
+              <div class="si-tagline">What are you on?</div>
+              <div class="si-box">
+                <span class="si-text">write Q3 board deck<span class="caret"></span></span>
+              </div>
+            </div>
+
+            <!-- Scene 2: 45-min timer -->
+            <div class="scene scene-timer">
+              <div class="st-session">SESSION 01 / 04</div>
+              <div class="st-task">write Q3 board deck</div>
+              <div class="st-clock">44<span class="st-sep">:</span><span class="st-secs"><span class="st-sec-roller">21<br>20</span></span></div>
+            </div>
+
+            <!-- Scene 3: AI decisions feed -->
+            <div class="scene scene-decisions">
+              <div class="sd-head">DECISIONS</div>
+              <div class="sd-rule"></div>
+              <div class="sd-row r1">
+                <span class="sdr-dot ok">●</span>
+                <span class="sdr-domain">notion.so</span>
+                <span class="sdr-tag allowed">ALLOWED</span>
+              </div>
+              <div class="sd-row r2">
+                <span class="sdr-dot ok">●</span>
+                <span class="sdr-domain">statista.com</span>
+                <span class="sdr-tag allowed">ALLOWED</span>
+              </div>
+              <div class="sd-row r3">
+                <span class="sdr-dot no">●</span>
+                <span class="sdr-domain">twitter.com</span>
+                <span class="sdr-tag blocked">BLOCKED</span>
+              </div>
+              <div class="sd-row r4">
+                <span class="sdr-dot no">●</span>
+                <span class="sdr-domain">youtube.com</span>
+                <span class="sdr-tag blocked">BLOCKED</span>
+              </div>
+              <div class="sd-row r5">
+                <span class="sdr-dot no">●</span>
+                <span class="sdr-domain">instagram.com</span>
+                <span class="sdr-tag blocked">BLOCKED</span>
+              </div>
+              <div class="sd-row r6">
+                <span class="sdr-dot no">●</span>
+                <span class="sdr-domain">reddit.com</span>
+                <span class="sdr-tag blocked">BLOCKED</span>
+              </div>
+            </div>
+
+            <!-- Scene 4: done for today -->
+            <div class="scene scene-done">
+              <div class="sdn-session">SESSION 04 / 04</div>
+              <div class="sdn-big">4/4</div>
+              <div class="sdn-label">Done for today.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="features">
+    <div class="container">
+      <div class="grid-3">
+        <div class="feature">
+          <div class="feature-num">01</div>
+          <h3>AI judges each request</h3>
+          <p>No fixed allowlists. The AI sees what you're working on and
+             decides per domain: relevant? allowed. Not? blocked.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-num">02</div>
+          <h3>Blocks apps too</h3>
+          <p>Spotify, Discord, games — if they launch during a sprint and
+             aren't on-task, they close. Doesn't touch what was already running.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-num">03</div>
+          <h3>Camera keeps you honest</h3>
+          <p>While a sprint is active, the camera watches you're at the
+             desk. Walk away for 20 seconds — sprint forfeits. Local only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <div class="container narrow">
+      <p class="kicker">PHILOSOPHY</p>
+      <h2>The constraint is the feature.</h2>
+      <p>
+        Four sprints. Forty-five minutes each. No customization. No "just one
+        more." Most focus apps give you knobs — duration, blocklist, schedule.
+        That's where they fail: every knob is a chance for you to negotiate
+        with yourself.
+      </p>
+      <p>
+        45 doesn't negotiate. The structure is the value.
+      </p>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="container">
+      <p class="kicker">HOW IT WORKS</p>
+      <div class="how-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Type the task</h3>
+          <p>"Write the Q3 board deck." Or use voice. The AI uses this
+             string to judge every request that follows.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Hit Start</h3>
+          <p>Windows proxy points at 45. Camera turns on. Process monitor
+             starts. The 45-minute timer begins.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Work, watched</h3>
+          <p>Visit relevant sites — allowed. Open Spotify — closed.
+             Walk away — forfeit. The decisions feed shows what's happening.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Repeat × 4</h3>
+          <p>That's the day. After four, the app locks until tomorrow.
+             You don't get to sprint more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="teams" id="teams">
+    <div class="container narrow">
+      <p class="kicker">FOR TEAMS</p>
+      <h2>A productivity benefit your people will actually use.</h2>
+      <p class="teams-intro">
+        Most "wellness perks" sit unused. 45 gets opened the moment your team
+        needs to ship something hard. Pay per seat, deploy in 10 minutes, get
+        out of your team's way.
+      </p>
+
+      <div class="teams-grid">
+        <div class="teams-card">
+          <h3>Zero employee surveillance</h3>
+          <p>You buy the perk. They use it. No data flows back to you about
+             what they worked on, how long they sat at the desk, or what was
+             blocked. By design.</p>
+        </div>
+        <div class="teams-card">
+          <h3>Aggregate usage only</h3>
+          <p>Your only dashboard: <span class="mono">"42 sprints completed
+             across your 12 seats this month."</span> No names. No tasks. No
+             URLs. Enough to prove ROI, nothing more.</p>
+        </div>
+        <div class="teams-card">
+          <h3>Self-serve deployment</h3>
+          <p>Send your team a download link. They install, sign in with their
+             work email, start sprinting. No IT ticket required.</p>
+        </div>
+        <div class="teams-card">
+          <h3>Compliance-ready</h3>
+          <p>All AI evaluation runs locally on each employee's machine. Only
+             root domain names hit OpenAI — no URLs, no content, no PII.
+             GDPR-friendly. DPA on request.</p>
+        </div>
+      </div>
+
+      <div class="teams-cta">
+        <a href="mailto:hello@45.day?subject=45 for our team" class="btn-pill big">Book a 15-min demo</a>
+        <span class="teams-meta">Talk to a human · No deck, no slides · ~15 minutes</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy" id="privacy">
+    <div class="container narrow">
+      <p class="kicker">PRIVACY</p>
+      <h2>What we don't see.</h2>
+      <p class="privacy-intro">
+        Most "focus apps" sold to companies are surveillance products in a
+        wellness wrapper. 45 isn't. Here is precisely what your employer
+        cannot get from us, because we don't have it:
+      </p>
+
+      <ul class="privacy-list">
+        <li><strong>Which sites you visit.</strong> We see the root domain
+            (e.g. <span class="mono">linkedin.com</span>) only at the moment a
+            blocking decision is made. We don't log it, store it, or report it.</li>
+        <li><strong>What you wrote in your task description.</strong> Sent to
+            OpenAI as part of the per-domain check, then discarded. Never
+            persisted on our end.</li>
+        <li><strong>Whether you actually worked.</strong> The camera presence
+            check runs entirely on your machine. We never see the video stream
+            and no images leave your laptop.</li>
+        <li><strong>How many sprints you completed.</strong> Stored locally on
+            your machine. Aggregate count for the team is uploaded once a day,
+            with no per-user breakdown.</li>
+        <li><strong>Your tasks, history, or settings.</strong> All on your
+            machine in plain JSON files you can read or delete anytime.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <p class="kicker center-text">PRICING</p>
+      <h2 class="pricing-title">Two plans. Same product.</h2>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <p class="price-tag">INDIVIDUAL</p>
+          <div class="price-header">
+            <h3 class="price-amount">$7<span class="per">/ month</span></h3>
+            <p class="price-sub">Or $70/year — 2 months free</p>
+          </div>
+          <ul class="price-list">
+            <li>4 × 45-min sprints, daily</li>
+            <li>AI-judged web + app blocking</li>
+            <li>Voice input via Whisper</li>
+            <li>Camera presence detection</li>
+            <li>7-day free trial · no card</li>
+          </ul>
+          <a href="#" class="btn-pill big full outline dl-trigger">Start free trial</a>
+        </div>
+
+        <div class="price-card featured">
+          <p class="price-tag">TEAMS</p>
+          <div class="price-header">
+            <h3 class="price-amount">$5<span class="per">/ seat / month</span></h3>
+            <p class="price-sub">3-seat minimum · annual billing</p>
+          </div>
+          <ul class="price-list">
+            <li>Everything in Individual</li>
+            <li>Group billing · single invoice</li>
+            <li>Self-serve seat management</li>
+            <li>Aggregate (non-PII) usage report</li>
+            <li>DPA + security one-pager on request</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="mailto:hello@45.day?subject=45 for our team" class="btn-pill big full">Book a demo</a>
+        </div>
+      </div>
+
+      <p class="price-note">
+        Bigger team (50+ seats)? <a href="mailto:hello@45.day">Talk to us about a custom plan.</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container narrow">
+      <p class="kicker">FAQ</p>
+      <details>
+        <summary>Why locked at 4 × 45 minutes? Can I customize it?</summary>
+        <p>No. The constraint is the feature. Every focus app with a "duration
+           slider" eventually becomes an app you negotiate with. 45 doesn't
+           negotiate.</p>
+      </details>
+      <details>
+        <summary>Does my employer see what I do?</summary>
+        <p>No. All AI evaluation, camera detection, and process monitoring
+           runs locally on your machine. The only thing 45 sends to a server
+           is the domain name being judged — never page content, never URLs,
+           never employee identity.</p>
+      </details>
+      <details>
+        <summary>What if my camera is off / unavailable?</summary>
+        <p>You can disable presence detection in Settings. Sprints still
+           block sites and apps, you just don't get the "walk away → forfeit"
+           check.</p>
+      </details>
+      <details>
+        <summary>What if I need a 5th sprint?</summary>
+        <p>You don't. Tomorrow.</p>
+      </details>
+      <details>
+        <summary>Does it work on Mac / Linux?</summary>
+        <p>Windows only right now. Mac is on the roadmap.</p>
+      </details>
+      <details>
+        <summary>What's the AI? Where does my task description go?</summary>
+        <p>OpenAI's gpt-4o-mini. Your task string + the domain being judged
+           go in one short prompt. No URLs, no page content, no history.
+           Costs roughly $0.001 per sprint.</p>
+      </details>
+
+      <details>
+        <summary>(HR) Does this surveil our employees?</summary>
+        <p>No. 45 is a self-imposed commitment tool. The only data point we
+           ever upload to a server is a root domain name at the moment of a
+           blocking decision — and we don't store it. The camera presence
+           check runs locally; we never see the video. Aggregate usage stats
+           (sprints completed across the team) are the only thing visible to
+           a team admin, and never per-user.</p>
+      </details>
+
+      <details>
+        <summary>(HR) Does it work with our works council / German labor law?</summary>
+        <p>Yes — because 45 collects no identifiable employee data and runs
+           entirely on the employee's machine, it sits outside most
+           workplace-surveillance regulations. Happy to provide our
+           security/privacy one-pager for your council review.</p>
+      </details>
+
+      <details>
+        <summary>(HR) How do we deploy this to 50 people?</summary>
+        <p>Send a signed installer link. They run it, sign in with their work
+           email, done. No agent, no MDM profile, no IT ticket. Seats are
+           managed via a simple web dashboard you'll get with your team
+           subscription.</p>
+      </details>
+
+      <details>
+        <summary>(HR) What happens when someone leaves?</summary>
+        <p>Revoke their seat from the dashboard. Their app stops working
+           within 24 hours; their local task history stays on their personal
+           machine (we never had it).</p>
+      </details>
+
+      <details>
+        <summary>(HR) Can we get a custom DPA / MSA?</summary>
+        <p>Yes for team subscriptions of 25+ seats. Email
+           <a href="mailto:hello@45.day">hello@45.day</a> with your standard
+           template.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta" id="download">
+    <div class="container narrow center">
+      <h2>Lock in. Four times.</h2>
+      <p>Download 45, install it, try it for a week. If it doesn't change
+         how your day feels, don't pay.</p>
+      <a href="#" class="btn-pill big dl-trigger">Download for Windows</a>
+      <p class="cta-note">v1.0 · 80MB · Windows 10+ · 7-day free trial</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <img src="logo.jpg" class="footer-logo" alt="45">
+          <p class="footer-text">Deep work, four times daily.</p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:hello@45.day">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 · 45</p>
+    </div>
+  </footer>
+
+  <script>
+    var modal = document.getElementById("dlModal");
+    document.querySelectorAll(".dl-trigger").forEach(function(el) {
+      el.addEventListener("click", function(e) {
+        e.preventDefault();
+        modal.style.display = "flex";
+      });
+    });
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>

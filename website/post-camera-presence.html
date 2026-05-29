@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why We Added a Camera to a Focus App — 45</title>
+  <meta name="description" content="You can block every website and still spend the sprint making coffee. Here's why we added a presence check — and why it's opt-in.">
+  <link rel="icon" href="favicon.ico">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why We Added a Camera to a Focus App — 45">
+  <meta property="og:description" content="You can block every website and still spend the sprint making coffee. Here's why we added a presence check — and why it's opt-in.">
+  <meta property="og:image" content="logo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why We Added a Camera to a Focus App — 45">
+  <meta name="twitter:description" content="You can block every website and still spend the sprint making coffee. Here's why we added a presence check — and why it's opt-in.">
+  <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .post-header { padding: 80px 32px 48px; }
+    .post-header h1 { font-family: var(--serif); font-size: 3rem; font-weight: 400; line-height: 1.15; margin-bottom: 20px; max-width: 680px; }
+    .post-header .meta { color: var(--text-tertiary); font-family: var(--mono); font-size: 0.85rem; }
+    .post-body { padding: 0 32px 100px; }
+    .post-body .container { max-width: 680px; }
+    .post-body p { color: var(--text-secondary); font-size: 1.08rem; line-height: 1.75; margin-bottom: 24px; }
+    .post-body h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--text-primary); margin: 48px 0 16px; }
+    .post-body strong { color: var(--text-primary); }
+    .post-body blockquote { border-left: 3px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-primary); font-family: var(--serif); font-size: 1.15rem; font-style: italic; }
+    .back { display: inline-block; color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 32px; }
+    .back:hover { color: var(--accent); }
+  </style>
+</head>
+<body class="light-page">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand"><img src="logo.jpg" class="nav-logo" alt="45"></a>
+    <div class="nav-links">
+      <a href="index.html#how">How it works</a>
+      <a href="teams.html">For teams</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#download" class="btn-pill">Get 45</a>
+    </div>
+  </nav>
+
+  <article>
+    <header class="post-header">
+      <div class="container narrow">
+        <a href="blog.html" class="back">← All posts</a>
+        <p class="kicker">HOW IT WORKS</p>
+        <h1>Why We Added a Camera to a Focus App</h1>
+        <p class="meta">March 2026 · 4 min read</p>
+      </div>
+    </header>
+
+    <div class="post-body">
+      <div class="container">
+
+        <p>The presence check is the feature people ask about most. The reaction is always some version of: "Wait — it uses my camera?" Usually skeptical. Sometimes alarmed. So here's the full explanation of what it does, why we built it, and why the privacy story is actually stronger than it sounds.</p>
+
+        <h2>The problem it solves</h2>
+
+        <p>You can block every website. You can lock down every distraction. And you can still spend the session making coffee, folding laundry, or staring out the window while the timer counts down.</p>
+
+        <p>Website blocking solves the browser problem. It doesn't solve the presence problem. A session where you're physically absent isn't a focus session — it's a running clock. And for some people (particularly those working from home, where the couch is twenty steps away), the absence problem is just as real as the distraction problem.</p>
+
+        <p>We needed a way to verify that someone was actually at their desk. The only sensor that can do that without being invasive is the one already built into the laptop.</p>
+
+        <h2>What the camera actually does</h2>
+
+        <p>The presence check takes a low-resolution frame sample every few minutes during a session. It runs a lightweight on-device model that answers a single binary question: is a person present in frame, yes or no?</p>
+
+        <p>That's all it does. <strong>No video is recorded. No frames are stored. No images ever leave your device.</strong> The model runs locally, produces a boolean, and discards the frame immediately. The result — present or absent — is what the app acts on.</p>
+
+        <p>If you step away briefly, nothing happens. If you're absent for an extended stretch, the session pauses and you get a prompt to confirm you're back before it resumes. The session clock doesn't keep running while you're gone.</p>
+
+        <h2>Why it's opt-in</h2>
+
+        <p>The presence check is not on by default. You enable it deliberately, in settings, knowing what it does.</p>
+
+        <p>We made it opt-in for two reasons. The first is obvious: not everyone needs it. If you work in an office and stepping away from your desk is genuinely rare, the check is unnecessary overhead. The feature is for people who work remotely, or who know from self-experience that physical distraction is a real pattern for them.</p>
+
+        <p>The second reason is more important. <strong>A tool you've chosen to use works differently than a tool that was imposed on you.</strong> When you turn on the presence check, you're making a deliberate commitment — you're telling yourself that you're serious enough about this session to be held accountable even when no one is watching. That decision has psychological weight that a mandatory check would undermine.</p>
+
+        <blockquote>The constraint only works if you put it there yourself. Surveillance imposed from outside creates resentment. Constraints chosen voluntarily create commitment.</blockquote>
+
+        <h2>The privacy architecture</h2>
+
+        <p>We're aware that "we use your camera" is a sentence that requires trust. So let's be specific about what that trust is actually based on.</p>
+
+        <p>Everything happens on your machine. The model is embedded in the app — there's no API call, no frame upload, no remote processing. The frame is captured, analyzed, and discarded in the same pipeline, entirely locally. When the app closes, there is nothing related to the camera check on any server anywhere, because nothing related to the camera check ever left your laptop.</p>
+
+        <p>For teams specifically: the presence check data isn't part of what we report to admins. The aggregate sprint count we expose to team administrators tells them nothing about whether any individual used the camera feature. It's not in the data model at all.</p>
+
+        <h2>The people who actually use it</h2>
+
+        <p>Based on what users tell us, the presence check gets enabled by a specific type of person: someone who has identified that physical absence — not digital distraction — is their primary failure mode. They start a session, get up to get something, and twenty minutes later realize they're in another room doing something completely different.</p>
+
+        <p>For that person, the presence check is the feature that makes the app work. Not because it catches them (there's nothing to catch — no data, no report, no record), but because knowing it's on changes their behavior before the session starts. They sit down. They stay seated. The accountability is to themselves, not to anyone watching.</p>
+
+        <p>That's the only kind of accountability that actually works in the long run anyway.</p>
+
+      </div>
+    </div>
+  </article>
+
+  <section style="background:var(--surface);padding:60px 32px;text-align:center;">
+    <div class="container narrow">
+      <h2 style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:12px">See it for yourself.</h2>
+      <p style="color:var(--text-secondary);margin-bottom:28px">Download 45 and try a session. The presence check is in settings if you want it.</p>
+      <a href="index.html#download" class="btn-pill big">Download for Windows</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div><img src="logo.jpg" class="footer-logo" alt="45"><p class="footer-text">Deep work, four times daily.</p></div>
+        <div class="footer-links">
+          <a href="blog.html">Blog</a>
+          <a href="teams.html">For teams</a>
+          <a href="mailto:hello@45.day">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 · 45</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt pyinstaller opencv-python
+      - name: Build
+        run: pyinstaller Fortyfive.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Fortyfive-Windows
+          path: dist/Fortyfive.exe
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install openai sounddevice numpy pillow psutil httpx opencv-python pyinstaller
+          pip install sv-ttk
+      - name: Convert icon
+        run: |
+          if [ -f icon.ico ]; then
+            mkdir icon.iconset
+            sips -z 16 16     icon.ico --out icon.iconset/icon_16x16.png    2>/dev/null || true
+            sips -z 32 32     icon.ico --out icon.iconset/icon_32x32.png    2>/dev/null || true
+            sips -z 64 64     icon.ico --out icon.iconset/icon_64x64.png    2>/dev/null || true
+            sips -z 128 128   icon.ico --out icon.iconset/icon_128x128.png  2>/dev/null || true
+            sips -z 256 256   icon.ico --out icon.iconset/icon_256x256.png  2>/dev/null || true
+            iconutil -c icns icon.iconset -o icon.icns 2>/dev/null || cp icon.ico icon.icns
+          else
+            touch icon.icns
+          fi
+      - name: Build
+        run: pyinstaller Fortyfive-mac.spec
+      - name: Zip app bundle
+        run: cd dist && zip -r Fortyfive-Mac.zip Fortyfive.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Fortyfive-Mac
+          path: dist/Fortyfive-Mac.zip

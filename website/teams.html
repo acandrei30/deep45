@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>45 for Teams — deep work as a company benefit</title>
+  <meta name="description" content="Give your team three hours of protected deep work every day. No surveillance. No predefined blocklists. Just focus.">
+  <link rel="icon" href="favicon.ico">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="45 for Teams — Deep work as a company benefit">
+  <meta property="og:description" content="Give your team three hours of protected focus time every day. No surveillance. No blocklists. Just work.">
+  <meta property="og:image" content="logo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="45 for Teams — Deep work as a company benefit">
+  <meta name="twitter:description" content="Give your team three hours of protected focus time every day. No surveillance. No blocklists. Just work.">
+  <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .teams-hero { padding: 80px 32px 100px; text-align: center; }
+    .teams-hero h1 { font-family: var(--serif); font-size: 3.6rem; font-weight: 400; line-height: 1.1; margin-bottom: 24px; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .teams-hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 540px; margin: 0 auto 40px; }
+
+    .privacy-hero { background: #111; padding: 80px 32px; }
+    .privacy-hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .privacy-hero h2 { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; margin-bottom: 20px; }
+    .privacy-hero p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 16px; }
+
+    .privacy-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .privacy-table th { text-align: left; padding: 10px 16px; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 1px solid var(--border); }
+    .privacy-table td { padding: 14px 16px; font-size: 0.95rem; border-bottom: 1px solid #222; vertical-align: top; }
+    .privacy-table td:first-child { color: var(--text-primary); font-weight: 500; width: 44%; }
+    .privacy-table td:last-child { color: var(--text-secondary); }
+    .tag-no  { display: inline-block; background: rgba(220,38,38,0.12); color: #f87171; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); }
+    .tag-yes { display: inline-block; background: rgba(245,180,84,0.12); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); }
+
+    .compare { padding: 80px 32px; }
+    .compare h2 { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; margin-bottom: 8px; }
+    .compare-sub { color: var(--text-secondary); margin-bottom: 48px; }
+    .compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .compare-card { background: #161616; border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+    .compare-card.featured { border-color: rgba(245,180,84,0.3); background: var(--surface); }
+    .compare-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .compare-card .cc-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 20px; }
+    .compare-card.featured .cc-label { color: var(--accent); }
+    .compare-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.92rem; color: var(--text-secondary); align-items: flex-start; }
+    .compare-item .ci-icon { flex-shrink: 0; margin-top: 2px; }
+    .ci-icon.yes { color: var(--accent); }
+    .ci-icon.no  { color: #555; }
+
+    .how-deploy { background: #111; padding: 80px 32px; }
+    .deploy-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+    .deploy-step { border-top: 1px solid var(--border); padding-top: 24px; }
+    .deploy-num { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 12px; }
+    .deploy-step h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+    .deploy-step p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .faq-teams { padding: 80px 32px; }
+
+    .teams-cta-section { background: var(--surface); padding: 100px 32px; text-align: center; }
+    .teams-cta-section h2 { font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 16px; }
+    .teams-cta-section p { color: var(--text-secondary); font-size: 1.1rem; max-width: 480px; margin: 0 auto 36px; }
+    .cta-pair { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+
+    @media (max-width: 860px) {
+      .privacy-hero .container { grid-template-columns: 1fr; gap: 48px; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .deploy-steps { grid-template-columns: 1fr; }
+      .teams-hero h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand"><img src="logo.jpg" class="nav-logo" alt="45"></a>
+    <div class="nav-links">
+      <a href="index.html#how">How it works</a>
+      <a href="teams.html" style="color:var(--accent)">For teams</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#download" class="btn-pill">Get 45</a>
+    </div>
+  </nav>
+
+  <section class="teams-hero">
+    <p class="hero-eyebrow">45 FOR TEAMS</p>
+    <h1>Give your team three hours of <em>real</em> work. Every day.</h1>
+    <p>A focus benefit your people will actually open. No surveillance. No blocklists to configure. No IT ticket to file.</p>
+    <div class="cta-pair">
+      <a href="mailto:hello@45.day?subject=45 for our team" class="btn-pill big">Book a 15-min demo</a>
+      <a href="index.html#pricing" style="color:var(--text-secondary); font-size:0.95rem">See pricing →</a>
+    </div>
+  </section>
+
+  <!-- Privacy section -->
+  <section class="privacy-hero">
+    <div class="container" style="max-width:1100px">
+      <div>
+        <p class="kicker">BUILT FOR TRUST</p>
+        <h2>Your employees won't feel watched. Because they aren't.</h2>
+        <p>Most "focus tools" sold to companies are monitoring products in a wellness wrapper. 45 is the opposite. We designed the data model so surveillance is structurally impossible — not just against our policy.</p>
+        <p>All AI evaluation, camera detection, and process monitoring runs locally on each machine. The only thing that leaves the laptop is a root domain name at the moment of a blocking decision. We don't store it.</p>
+      </div>
+      <div>
+        <table class="privacy-table">
+          <thead>
+            <tr>
+              <th>Data point</th>
+              <th>What 45 does with it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Which websites they visit</td>
+              <td><span class="tag-no">NEVER STORED</span> Root domain evaluated locally at block-time, then discarded.</td>
+            </tr>
+            <tr>
+              <td>Their task descriptions</td>
+              <td><span class="tag-no">NEVER STORED</span> Sent to OpenAI for one prompt, never persisted on our end.</td>
+            </tr>
+            <tr>
+              <td>Camera footage</td>
+              <td><span class="tag-no">NEVER LEAVES DEVICE</span> Processed on-device. No video, no frames, no stream.</td>
+            </tr>
+            <tr>
+              <td>Sprint history per user</td>
+              <td><span class="tag-no">NOT ACCESSIBLE TO YOU</span> Stored locally. We have no per-user breakdown.</td>
+            </tr>
+            <tr>
+              <td>Team-level sprint count</td>
+              <td><span class="tag-yes">AGGREGATE ONLY</span> "42 sprints this month across 12 seats." No names.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="compare">
+    <div class="container" style="max-width:1100px">
+      <p class="kicker">WHY 45</p>
+      <h2>Not another monitoring tool.</h2>
+      <p class="compare-sub">Most productivity software sold to companies tracks employees. 45 doesn't — by design.</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <p class="cc-label">Typical "focus" tools</p>
+          <h3>Activity trackers</h3>
+          <div class="compare-item"><span class="ci-icon no">✗</span> Records which apps are open</div>
+          <div class="compare-item"><span class="ci-icon no">✗</span> Screenshots sent to manager dashboard</div>
+          <div class="compare-item"><span class="ci-icon no">✗</span> Per-user URL history</div>
+          <div class="compare-item"><span class="ci-icon no">✗</span> Requires IT installation and admin access</div>
+          <div class="compare-item"><span class="ci-icon no">✗</span> Employee resentment built-in</div>
+        </div>
+        <div class="compare-card featured">
+          <p class="cc-label">45</p>
+          <h3>A focus benefit</h3>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> No per-user data visible to employer</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> All AI runs locally on employee device</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Camera is opt-in, video never leaves laptop</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Self-serve install, no IT required</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Employees actually want to use it</div>
+        </div>
+        <div class="compare-card">
+          <p class="cc-label">What you get as admin</p>
+          <h3>Just enough</h3>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Total sprints across your team this month</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Active seat count</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Seat management (add / remove)</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> Single invoice, annual billing</div>
+          <div class="compare-item"><span class="ci-icon yes">✓</span> DPA on request (25+ seats)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deployment -->
+  <section class="how-deploy">
+    <div class="container" style="max-width:1100px">
+      <p class="kicker">DEPLOYMENT</p>
+      <h2 style="font-family:var(--serif);font-size:2.4rem;font-weight:400;margin-bottom:8px">Up and running in 10 minutes.</h2>
+      <p style="color:var(--text-secondary)">No MDM profile. No agent. No IT ticket.</p>
+      <div class="deploy-steps">
+        <div class="deploy-step">
+          <div class="deploy-num">01</div>
+          <h3>Subscribe and get your link</h3>
+          <p>We send you a signed installer link and a team code. Forward it to your people — no admin portal required.</p>
+        </div>
+        <div class="deploy-step">
+          <div class="deploy-num">02</div>
+          <h3>Each person installs in 2 min</h3>
+          <p>One .exe, double-click, sign in with work email. The app configures itself. No IT involvement.</p>
+        </div>
+        <div class="deploy-step">
+          <div class="deploy-num">03</div>
+          <h3>Manage seats from your dashboard</h3>
+          <p>Add or remove seats instantly. Revoked seats stop working within 24 hours. One invoice at the end of the month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HR FAQ -->
+  <section class="faq-teams">
+    <div class="container narrow">
+      <p class="kicker">HR &amp; LEGAL FAQ</p>
+      <h2 style="font-family:var(--serif);font-size:2.4rem;font-weight:400;margin-bottom:40px">Questions we get from HR.</h2>
+
+      <details open>
+        <summary>Does this constitute employee monitoring under GDPR / labor law?</summary>
+        <p>No. 45 collects no identifiable employee data — not their name, not their tasks, not their browsing. The camera presence check runs locally with no video transmitted. Because there is no personal data collected, it falls outside the scope of most workplace surveillance regulations, including the GDPR and German Betriebsverfassungsgesetz. We're happy to provide a technical data-flow document for your works council.</p>
+      </details>
+      <details>
+        <summary>Can our works council (Betriebsrat) block this?</summary>
+        <p>Unlikely. Works councils typically scrutinize tools that collect personal data or enable per-person monitoring. 45 doesn't do either. We can provide a one-pager describing exactly what data is processed and where, which is usually sufficient for a council review.</p>
+      </details>
+      <details>
+        <summary>What happens to data when an employee leaves?</summary>
+        <p>Revoke their seat from your dashboard. Their app stops working within 24 hours. Their local sprint history stays on their personal machine — we never held it. There is nothing to delete from our systems because it was never there.</p>
+      </details>
+      <details>
+        <summary>Can we get a DPA or MSA?</summary>
+        <p>Yes for team subscriptions of 25+ seats. Email <a href="mailto:hello@45.day" style="color:var(--accent)">hello@45.day</a> with your standard template and we'll review within 5 business days.</p>
+      </details>
+      <details>
+        <summary>What if an employee doesn't want to use it?</summary>
+        <p>45 is never mandatory — it's a benefit, like a gym subscription. Employees opt in, install it themselves, and can uninstall at any time. You can't see whether any individual person uses it or not.</p>
+      </details>
+      <details>
+        <summary>Is this compatible with our IT security policies?</summary>
+        <p>In most cases yes. 45 sets a local Windows system proxy during a sprint and removes it when the sprint ends. It doesn't install drivers, system services, or browser extensions. For a detailed technical spec, email us.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="teams-cta-section">
+    <div class="container narrow">
+      <h2>Start with a 15-minute call.</h2>
+      <p>No deck, no demo script. We'll answer your questions and figure out if 45 is a fit for your team.</p>
+      <div class="cta-pair">
+        <a href="mailto:hello@45.day?subject=45 for our team" class="btn-pill big">Book a call</a>
+        <a href="index.html#pricing" style="color:var(--text-secondary);font-size:0.95rem">See pricing first →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <img src="logo.jpg" class="footer-logo" alt="45">
+          <p class="footer-text">Deep work, four times daily.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="blog.html">Blog</a>
+          <a href="index.html#pricing">Pricing</a>
+          <a href="mailto:hello@45.day">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 · 45</p>
+    </div>
+  </footer>
+
+</body>
+</html>

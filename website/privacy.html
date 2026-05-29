@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — 45</title>
+  <meta name="description" content="45 collects almost nothing. Here's exactly what we do and don't see.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .post-header { padding: 80px 32px 48px; }
+    .post-header h1 { font-family: var(--serif); font-size: 3rem; font-weight: 400; line-height: 1.15; margin-bottom: 20px; max-width: 680px; }
+    .post-header .meta { color: var(--text-tertiary); font-family: var(--mono); font-size: 0.85rem; }
+    .post-body { padding: 0 32px 100px; }
+    .post-body .container { max-width: 680px; }
+    .post-body p { color: var(--text-secondary); font-size: 1.08rem; line-height: 1.75; margin-bottom: 24px; }
+    .post-body h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--text-primary); margin: 48px 0 16px; }
+    .post-body h3 { font-family: var(--sans); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: 28px 0 10px; }
+    .post-body strong { color: var(--text-primary); }
+    .post-body ul { color: var(--text-secondary); font-size: 1.08rem; line-height: 1.75; margin-bottom: 24px; padding-left: 24px; }
+    .post-body ul li { margin-bottom: 8px; }
+    .post-body a { color: var(--accent); }
+  </style>
+</head>
+<body class="light-page">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand"><img src="logo.jpg" class="nav-logo" alt="45"></a>
+    <div class="nav-links">
+      <a href="index.html#how">How it works</a>
+      <a href="teams.html">For teams</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#download" class="btn-pill">Get 45</a>
+    </div>
+  </nav>
+
+  <article>
+    <header class="post-header">
+      <div class="container narrow">
+        <p class="kicker">LEGAL</p>
+        <h1>Privacy Policy</h1>
+        <p class="meta">Last updated: May 2026</p>
+      </div>
+    </header>
+
+    <div class="post-body">
+      <div class="container">
+
+        <p>45 is built around a simple principle: your focus data is yours, and we shouldn't need to see it to run the product. This policy describes exactly what we collect, why, and what we don't.</p>
+
+        <h2>What we collect</h2>
+
+        <h3>Account information</h3>
+        <p>When you sign up, we store your email address and a hashed password (or an OAuth token if you use SSO). This is used solely for authentication and billing.</p>
+
+        <h3>Domain names — at evaluation time only</h3>
+        <p>When you visit a website during an active sprint, 45 intercepts the request and evaluates whether the root domain (e.g. <strong>github.com</strong>) is relevant to your current task. That domain name is sent to OpenAI's API as part of a short prompt. <strong>We do not store this domain, log it, or associate it with your account.</strong> It is used for one evaluation and discarded.</p>
+
+        <h3>Task descriptions — at evaluation time only</h3>
+        <p>The task you type or speak at the start of a sprint is sent to OpenAI alongside the domain being evaluated. This is the only time your task text leaves your device. <strong>We do not store task descriptions on our servers.</strong> Your full task history is kept in a local JSON file on your machine.</p>
+
+        <h3>Sprint count — aggregate only</h3>
+        <p>Once per day, the app reports a single integer to our servers: the number of sprints completed. On individual plans this is used only to enforce the daily limit. On team plans, we aggregate this across all seats so admins can see a team-level total (e.g. "42 sprints across 12 seats this month"). <strong>There is no per-user breakdown visible to team admins.</strong></p>
+
+        <h3>Billing data</h3>
+        <p>Payments are handled by Stripe. We receive a customer ID and subscription status. We do not store card numbers or full payment details.</p>
+
+        <h2>What we never collect</h2>
+
+        <ul>
+          <li><strong>Camera video or images.</strong> The presence check runs entirely on your device using a local model. No video stream, no frames, and no images leave your laptop. Ever.</li>
+          <li><strong>Full URLs or page content.</strong> We only see root domain names, and only at the moment of a blocking decision.</li>
+          <li><strong>Browsing history.</strong> We do not log which sites were allowed or blocked during a session.</li>
+          <li><strong>Keystrokes, screenshots, or app usage.</strong> We are not a monitoring product.</li>
+          <li><strong>Per-user sprint history (for team admins).</strong> Team administrators cannot see which individuals used the app, when, or what they worked on.</li>
+        </ul>
+
+        <h2>Third-party services</h2>
+
+        <h3>OpenAI</h3>
+        <p>We send two strings to OpenAI's API per blocking decision: your task description and the root domain being evaluated. This is subject to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's privacy policy</a>. We use the API in a way that disables training on API inputs by default. No persistent user profile is maintained at OpenAI on our behalf.</p>
+
+        <h3>Stripe</h3>
+        <p>Billing is handled by Stripe. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a>.</p>
+
+        <h2>Data storage and security</h2>
+        <p>Your task history, sprint history, and settings are stored locally on your device in plain JSON files. You can read, export, or delete them at any time. The only data we hold on our servers is your email address, hashed password or OAuth token, subscription status, and daily sprint count.</p>
+
+        <h2>Your rights (GDPR)</h2>
+        <p>If you are in the EU or UK, you have the right to access, correct, or delete the personal data we hold about you. To exercise any of these rights, email <a href="mailto:hello@45.day">hello@45.day</a>. We will respond within 30 days.</p>
+        <p>Because we do not store browsing data, task descriptions, or camera data on our servers, most deletion requests are satisfied by deleting your account — which removes your email and subscription record. Local data on your device is yours to delete directly.</p>
+
+        <h2>Cookies</h2>
+        <p>The 45 desktop app does not use cookies. Our website uses only the cookies required to keep you logged in to the account portal. We do not use tracking or advertising cookies.</p>
+
+        <h2>Children</h2>
+        <p>45 is not directed at children under 16. We do not knowingly collect data from anyone under 16.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>If we make material changes to this policy, we will notify you by email at least 14 days before the change takes effect.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this policy: <a href="mailto:hello@45.day">hello@45.day</a></p>
+
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div><img src="logo.jpg" class="footer-logo" alt="45"><p class="footer-text">Deep work, four times daily.</p></div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:hello@45.day">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 · 45</p>
+    </div>
+  </footer>
+
+</body>
+</html>

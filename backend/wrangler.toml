@@ -1,0 +1,7 @@
+name = "klar-proxy"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# Secrets are set via the CLI, not here:
+#   wrangler secret put OPENAI_API_KEY
+#   wrangler secret put KLAR_SHARED_SECRET
